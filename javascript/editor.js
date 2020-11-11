@@ -7,7 +7,7 @@
 
 // create array of annotations to be exported
 function getAnnotations() {
-    numberOfCategories = 7 + 1;
+    numberOfCategories = 15 + 1;
 
 
     // this would make an n*m matrics
@@ -18,23 +18,28 @@ function getAnnotations() {
     //         matrix[i][j] = ',';
     //     }
     // }
-     
+
     // create the array from category names and contents
-    var annotationsArray = [[],[]]
+    var annotationsArray = []
     for (let i = 1; i < numberOfCategories; i++) {
         getCategory = '.category-' + i;
         categoryName = $(getCategory).html();
         // populate the list from the transcript
         var items = document.getElementsByClassName('selected-' + i);
         // var items = document.getElementsByClassName(categoryName);
-        var array = [categoryName]
+        //var array = [categoryName]
         // put just the inner text in a new array
         for (let j = 0; j < items.length; j++) {
-            array[j+1] = items[j].innerText;   
+            time = 0;
+
+            if (items[j].parentElement && items[j].parentElement.attributes["data-time"]){
+            time = Math.round(items[j].parentElement.attributes["data-time"].value);
+            tc = items[j].parentElement.attributes["data-tc"].value;
+          }
+            annotationsArray.push([categoryName,time,tc, items[j].innerText]);
         }
-        annotationsArray[i-1] = array;
     }
-    
+
     return annotationsArray;
 }
 
@@ -67,8 +72,8 @@ function exportToCsv() {
     for (var i = 0; i < rows.length; i++) {
         csvFile += processRow(rows[i]);
     }
-    
-    
+
+
     var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename);
@@ -91,10 +96,10 @@ $(document).ready(function () {
 
     new GreenAudioPlayer('.gap-example');
 
-    // load audio 
+    // load audio
     var myAudio = document.getElementById("hyperplayer");
     var isPlaying = false;
-    var playbackRate = 1.0;
+    var playbackRate = 2.0;
 
     // select and highlight the clicked word (ready to be edited)
     // checks if the element clicked has a data confidence value, which implies it's a word
@@ -113,12 +118,14 @@ $(document).ready(function () {
         }
     });
 
-    
+
 
     // Add keybaord shortcuts
 
     // toggle play and pause
     function togglePlay() {
+      myAudio.playbackRate = 2;
+
         if (isPlaying) {
             myAudio.pause();
         } else {
@@ -131,7 +138,6 @@ $(document).ready(function () {
     myAudio.onpause = function () {
         isPlaying = false;
     };
-
     document.addEventListener('keydown', function (e) {
         // play and pause audio
         if (e.ctrlKey && e.keyCode == 32 && !(e.shiftKey)) {
@@ -169,7 +175,7 @@ $(document).ready(function () {
         };
     });
 
-    
+
 
 });
 
@@ -192,7 +198,7 @@ $('#confidence').change(function () {
 // highlight low confidence words
 
 function displayConfidence() {
-    
+
     if (displayConfidenceToggle == false) {
         var userConfidence = $("#user-confidence").val()
         var userConfidence = 0.95;
@@ -204,22 +210,22 @@ function displayConfidence() {
     } else if (displayConfidenceToggle == true) {
         $(".low-confidence").removeClass("low-confidence");
         console.log('removed');
-        
+
         displayConfidenceToggle = false;
     }
-    
+
 }
 // display confidence by default for demo
 displayConfidence()
 
-// turn off the interactivity and return text color 
+// turn off the interactivity and return text color
 // TODO this is not a smart way of doing this!
 
 var autoscrollOffToggle = false;
 
 function autoscrollOff() {
 
-    
+
     if (autoscrollOffToggle == false) {
         // to beat the javascript altering the color each span had to be selected
         $("[data-m]").addClass("not-interactive")
@@ -229,8 +235,27 @@ function autoscrollOff() {
         hyper(false);
     } else if (autoscrollOffToggle == true) {
         $(".not-interactive").removeClass("not-interactive");
-        
+
         autoscrollOffToggle = false;
     }
-    
+
 }
+
+function buildTimes(){
+  $('#times').empty();
+  var items = transcript.children[0].children[0].children;
+  for (let i = 0; i < items.length; i++) {
+    var el = document.createElement('span');
+    el.innerHTML = ""+items[i].getAttribute('data-tc')+"";
+    el.style.top = items[i].offsetTop+"px";
+$('#times').append(el);
+  }
+}
+
+$('#content').on('focus', function() {
+  before = $(this).html();
+}).on('blur keyup paste', function() {
+  if (before != $(this).html()) { $(this).trigger('change'); }
+});
+
+$('#content').on('change', function() {buildTimes()});
