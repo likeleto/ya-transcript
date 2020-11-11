@@ -13,13 +13,13 @@ function highlight(element) {
 }
 
 
-$(document).click(function(event) { 
+$(document).click(function(event) {
   $target = $(event.target);
-  if(!$target.closest('#tweet-box').length && 
+  if(!$target.closest('#tweet-box').length &&
   $('#tweet-box').is(":visible")) {
     // $('#menucontainer').hide();
     closeDrop();
-  }        
+  }
 });
 
 
@@ -34,6 +34,7 @@ $('.category-1').blur(function () {
 
 // this function is activated on mouseup after user has highlighted text
 function addShareTool(a, previousSelection) {
+console.log('addShareTool')
   // if annotation mode on
   var annotaionCheckbox = document.getElementById("annotation-switch").checked;
   if (annotaionCheckbox) {
@@ -44,13 +45,14 @@ function addShareTool(a, previousSelection) {
       selection = document.selection.createRange();
     }
 
-    if (selection.toString() !== '') {
-      if (drop) {
-        drop.close();
-        drop.remove();
-        drop = null;
-      }
 
+
+if (selection.toString() !== '') {
+  if (drop) {
+    drop.close();
+    drop.remove();
+    drop = null;
+  }
       anchorNode = selection.anchorNode.parentNode;
       focusNode = selection.focusNode.parentNode;
 
@@ -79,7 +81,7 @@ function addShareTool(a, previousSelection) {
           '&d=' +
           (anchorNodeTime + anchorNodeDuration - focusNodeTime);
       }
-
+if (!drop){
       drop = new Drop({
         target: anchorNode,
         classes: 'drop-theme-basic',
@@ -91,15 +93,16 @@ function addShareTool(a, previousSelection) {
       });
 
       drop.on('open', fillShare, false);
-
+}
       /*<a class="sharelink" href="#"><span class="icon-twitter"></span><span style="padding-left:40px">Share this text + video on Twitter</span></a>*/
     }
   }
 
-  
+
 }
 
 function fillShare() {
+
   // think can get rid of some of this function, since some of it was used to generate the tweet
 
   var url = window.location.href;
@@ -156,7 +159,14 @@ function fillShare() {
   var cat5 = $('.category-5').html();
   var cat6 = $('.category-6').html();
   var cat7 = $('.category-7').html();
-
+  var cat8 = $('.category-8').html();
+  var cat9 = $('.category-9').html();
+  var cat10 = $('.category-10').html();
+  var cat11 = $('.category-11').html();
+  var cat12 = $('.category-12').html();
+  var cat13 = $('.category-13').html();
+  var cat14 = $('.category-14').html();
+  var cat15 = $('.category-15').html();
 
   document.getElementById('tweet-box').innerHTML =
     '<div class="tweet-btn-hldr field is-grouped is-grouped-multiline">' +
@@ -167,6 +177,14 @@ function fillShare() {
     '<div class="control"><div class="tags has-addons"><a id="category-5-button" class="tag is-link is-light grey category-5" onclick="SelectText(5)" href="javascript:void(0);">' + cat5 + '</a></div></div>' +
     '<div class="control"><div class="tags has-addons"><a id="category-6-button" class="tag is-link is-light grey category-6" onclick="SelectText(6)" href="javascript:void(0);">' + cat6 + '</a></div></div>' +
     '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-7" onclick="SelectText(7)" href="javascript:void(0);">' + cat7 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-8" onclick="SelectText(8)" href="javascript:void(0);">' + cat8 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-9" onclick="SelectText(9)" href="javascript:void(0);">' + cat9 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-10" onclick="SelectText(10)" href="javascript:void(0);">' + cat10 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-11" onclick="SelectText(11)" href="javascript:void(0);">' + cat11 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-12" onclick="SelectText(12)" href="javascript:void(0);">' + cat12 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-13" onclick="SelectText(13)" href="javascript:void(0);">' + cat13 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-14" onclick="SelectText(14)" href="javascript:void(0);">' + cat14 + '</a></div></div>' +
+    '<div class="control"><div class="tags has-addons"><a id="category-7-button" class="tag is-link is-light grey category-15" onclick="SelectText(15)" href="javascript:void(0);">' + cat15 + '</a></div></div>' +
     '<div class="control"><div class="tags has-addons"><a id="category-remove-button" class="tag is-link is-light grey category-remove" onclick="RemoveAnnotation()" href="javascript:void(0);">' + 'Remove' + '</a></div></div>' +
     '</div>';
   drop.position();
@@ -181,17 +199,23 @@ var $textarea = $('#content');
 function RemoveAnnotation() {
   selection = window.getSelection();
   var fragment = selection.getRangeAt(0).cloneContents();
-  var firstElement = fragment.firstElementChild;
+  if (fragment.firstElementChild.getAttribute('data-m')){
+
+    var firstElement = fragment.firstElementChild;
+  }else{
+    var firstElement = fragment.firstElementChild.firstElementChild;
+  }
+
   var firstElementStartTime = firstElement.getAttribute('data-m');
 
-  // close the drop 
+  // close the drop
   closeDrop();
 
   // console.log(selection.getRangeAt(0));
   console.log(firstElementStartTime);
   findClass = "." + firstElementStartTime;
   console.log(findClass);
-  // $("span").find("[data-m='" + firstElementStartTime + "']").css('background-color', 'red'); 
+  // $("span").find("[data-m='" + firstElementStartTime + "']").css('background-color', 'red');
   $("span").find("[data-m='" + firstElementStartTime + "']").unwrap();
 
   var findClassAnnotation = "." + firstElementStartTime + "-annotation";
@@ -199,13 +223,13 @@ function RemoveAnnotation() {
 
 
   var n = $(findClassAnnotation).data("cat");
-  
+
   // make annotation category glow on remove
 
   // need to get annotation category number
 
   // sleect data aatribute data-cat - it is the category number we want: n
-  // it's of the paragraph with id 
+  // it's of the paragraph with id
   // all info hightlight wants is category number
   // that's stored in the data-cat category
   // of the paragraph that's about to get deleted
@@ -243,7 +267,7 @@ function SelectText(n) {
 
   // Make sure something was selected
   if (!selection.rangeCount) {
-
+    closeDrop();
     return;
   }
 
@@ -306,7 +330,7 @@ function SelectText(n) {
     console.log('just a fragment');
   }
 
-  closeDrop();
+closeDrop();
 
 }
 
@@ -340,17 +364,17 @@ function SelectText(n) {
 // allow annotations to be edited
 
 // highlight annotated sections on clicking them
-$('#content').on("click", ".selected", function () {
-  // true means it's already been highlighted
-
-
-
-  var $this = $(this);
-  addShareTool(false, $this)
-
-  // console.log($this.contents().unwrap());
-
-});
+// $('#content').on("click", ".selected", function () {
+//   // true means it's already been highlighted
+//
+//
+//
+//   var $this = $(this);
+//   addShareTool(false, $this)
+//
+//   // console.log($this.contents().unwrap());
+//
+// });
 
 
 
