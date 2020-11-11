@@ -99,7 +99,7 @@ $(document).ready(function () {
     // load audio
     var myAudio = document.getElementById("hyperplayer");
     var isPlaying = false;
-    var playbackRate = 2.0;
+    var playbackRate = 1.5;
 
     // select and highlight the clicked word (ready to be edited)
     // checks if the element clicked has a data confidence value, which implies it's a word
@@ -124,7 +124,7 @@ $(document).ready(function () {
 
     // toggle play and pause
     function togglePlay() {
-      myAudio.playbackRate = 2;
+      myAudio.playbackRate = 1.5;
 
         if (isPlaying) {
             myAudio.pause();
