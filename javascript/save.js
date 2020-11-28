@@ -161,40 +161,13 @@ function autosave() {
 
     // save annotation sidebar contents
     // var annotationsToSave = document.getElementsByClassName("annotation-content-1").innerHTML;
-    var annotationsToSave = $('.annotation-content-1').html();
-    window.localStorage.setItem("saved-annotation-1", annotationsToSave);
+    for (i = 1; i <= 15; i++) {
+      var annotationsToSave = $('.annotation-content-'+i).html();
+      window.localStorage.setItem("saved-annotation-"+i, annotationsToSave);
+      var annotationTitle = $('.category-'+i).html();
+      window.localStorage.setItem("saved-category-"+i, annotationTitle);
+    }
 
-    // save category titles (dumb)
-    var annotationTitle = $('.category-1').html();
-    window.localStorage.setItem("saved-category-1", annotationTitle);
-    var annotationTitle = $('.category-2').html();
-    window.localStorage.setItem("saved-category-2", annotationTitle);
-    var annotationTitle = $('.category-3').html();
-    window.localStorage.setItem("saved-category-3", annotationTitle);
-    var annotationTitle = $('.category-4').html();
-    window.localStorage.setItem("saved-category-4", annotationTitle);
-    var annotationTitle = $('.category-5').html();
-    window.localStorage.setItem("saved-category-5", annotationTitle);
-    var annotationTitle = $('.category-6').html();
-    window.localStorage.setItem("saved-category-6", annotationTitle);
-    var annotationTitle = $('.category-7').html();
-    window.localStorage.setItem("saved-category-7", annotationTitle);
-    var annotationTitle = $('.category-8').html();
-    window.localStorage.setItem("saved-category-8", annotationTitle);
-    var annotationTitle = $('.category-9').html();
-    window.localStorage.setItem("saved-category-9", annotationTitle);
-    var annotationTitle = $('.category-10').html();
-    window.localStorage.setItem("saved-category-10", annotationTitle);
-    var annotationTitle = $('.category-11').html();
-    window.localStorage.setItem("saved-category-11", annotationTitle);
-    var annotationTitle = $('.category-12').html();
-    window.localStorage.setItem("saved-category-12", annotationTitle);
-    var annotationTitle = $('.category-13').html();
-    window.localStorage.setItem("saved-category-13", annotationTitle);
-    var annotationTitle = $('.category-14').html();
-    window.localStorage.setItem("saved-category-14", annotationTitle);
-    var annotationTitle = $('.category-15').html();
-    window.localStorage.setItem("saved-category-15", annotationTitle);
 
 
 
@@ -231,88 +204,23 @@ function loadSavedText() {
                     document.getElementById("content").innerHTML = document.getElementById("content").innerHTML + storedText;
                 }
                 // TODO save more for each one
-                if (localStorage.getItem("saved-annotation-1")) {
-                    var storedAnnotation = localStorage.getItem("saved-annotation-1");
-                    $('.annotation-content-1').html(storedAnnotation);
+
+                for (i = 1; i <= 15; i++) {
+
+                if (localStorage.getItem("saved-annotation-"+i)) {
+                    var storedAnnotation = localStorage.getItem("saved-annotation-"+i);
+                    $('.annotation-content-'+i).html(storedAnnotation);
                 }
 
                 // load category names (dumb)
-                if (localStorage.getItem("saved-category-1")) {
+                if (localStorage.getItem("saved-category-"+i)) {
 
-                    var storedCategory = localStorage.getItem("saved-category-1");
-                    $('.category-1').html(storedCategory);
+                    var storedCategory = localStorage.getItem("saved-category-"+i);
+                    $('.category-'+i).html(storedCategory);
                 }
-                if (localStorage.getItem("saved-category-2")) {
+              }
 
-                    var storedCategory = localStorage.getItem("saved-category-2");
-                    $('.category-2').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-3")) {
 
-                    var storedCategory = localStorage.getItem("saved-category-3");
-                    $('.category-3').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-4")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-4");
-                    $('.category-4').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-5")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-5");
-                    $('.category-5').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-6")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-6");
-                    $('.category-6').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-7")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-7");
-                    $('.category-7').html(storedCategory);
-                }
-
-                if (localStorage.getItem("saved-category-8")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-8");
-                    $('.category-8').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-9")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-9");
-                    $('.category-9').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-10")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-10");
-                    $('.category-10').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-11")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-11");
-                    $('.category-11').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-12")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-12");
-                    $('.category-12').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-13")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-13");
-                    $('.category-13').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-14")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-14");
-                    $('.category-14').html(storedCategory);
-                }
-                if (localStorage.getItem("saved-category-15")) {
-
-                    var storedCategory = localStorage.getItem("saved-category-15");
-                    $('.category-15').html(storedCategory);
-                }
                 // load dark mode from cookie, else detect it from user computer
                 // if (localStorage.getItem("dark-mode-switch") != undefined) {
                 //     var storedDarkMode = localStorage.getItem("dark-mode-switch")
