@@ -82,11 +82,11 @@
                     <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Load audio…
+                    Загрузить аудио…
                   </span>
                 </span>
                 <span id="audio-name" class="file-name">
-                  none selected
+                  не выбрано
                 </span>
               </label>
             </div>
@@ -96,16 +96,16 @@
 
 
             <div class="control">
-              <div class="select is-small is-fullwidth"> -->
-            <!-- <div class="is-small"> -->
-            <!-- <select name="country" id="audioUrl">
+              <div class="select is-small is-fullwidth">
+            <div class="is-small">
+            <select name="country" id="audioUrl">
 
-                </select> -->
-            <!-- <input type="text" class="input is-small" id="audioUrl" placeholder="Enter audio filename" value="audio.mp3">
+                </select>
+            <input type="text" class="input is-small" id="audioUrl" placeholder="Enter audio filename" value="audio.mp3">
 
 
-              </div> -->
-            <!-- </div>
+              </div>
+            </div>
             <p class="control">
               <button onclick="getAudioUrl()" class="button is-small is-primary">Load</button>
             </p> -->
@@ -123,11 +123,11 @@
                     <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Load json…
+                    Загрузить json…
                   </span>
                 </span>
                 <span id="json-name" class="file-name">
-                  none selected
+                  не выбрано
                 </span>
               </label>
             </div>
@@ -162,11 +162,11 @@
                     <i class="fas fa-upload"></i>
                   </span>
                   <span class="file-label">
-                    Load project…
+                    Загрузить проект…
                   </span>
                 </span>
                 <span id="project-name" class="file-name">
-                  none selected
+                  не выбрано
                 </span>
               </label>
             </div>
@@ -191,8 +191,7 @@
               </input>
             </div>
             <p class="control">
-              <button class="button is-small is-primary disabled" name="export-html" onclick="exportToHtml()">Save
-                Project</button>
+              <button class="button is-small is-primary disabled" name="export-html" onclick="exportToHtml()">Скачать проект</button>
             </p>
           </div>
         </div>
@@ -208,16 +207,14 @@
           <div class="buttons">
             <div class="field">
               <button class="button is-small is-primary disabled" name="export-transcript"
-                onclick="exportToTxt()">Export
-                transcript text</button>
+                onclick="exportToTxt()">Транскрипт</button>
             </div>
           </div>
         </div>
         <div class="navbar-item">
           <div class="buttons">
             <div class="field">
-              <button class="button is-small is-primary" name="export-to-csv" onclick="exportToCsv()">Export
-                annotations</button>
+              <button class="button is-small is-primary" name="export-to-csv" onclick="exportToCsv()">Аннотации</button>
             </div>
           </div>
         </div>
@@ -225,47 +222,46 @@
       </div>
       <div class="navbar-item has-dropdown has-dropdown is-hoverable">
         <a class="navbar-link">
-          Settings
+          Настройки
         </a>
         <div class="navbar-dropdown">
           <div class="navbar-item">
           <div class="field">
             <input id="autosave" type="checkbox" name="autosave" class="switch is-rounded is-small"
-              checked="checked">
-            <label for="autosave">Autosave</label>
+              >
+            <label for="autosave">Автосохранение</label>
             <div class="field"></div>
             <input id="autoscroll-off" type="checkbox" name="autoscroll-off"
               class="switch is-rounded is-small" checked="checked" value="autoscroll-off">
-            <label for="autoscroll-off">Interactive script</label>
+            <label for="autoscroll-off">Прокручивать аудио</label>
           </div>
           </div>
           <div class="navbar-item">
             <div class="field">
               <input id="confidence" type="checkbox" name="confidence" class="switch is-rounded is-small"
                 checked="">
-              <label for="confidence">Highlight confidence</label>
+              <label for="confidence">Качество распознования</label>
               <!-- <input type="text" class="input" id="user-confidence" placeholder="Enter confidnece level" value="0.95"> -->
             </div>
             </div>
-            <div class="navbar-item">
+            <!-- <div class="navbar-item">
             <div class="field">
               <input id="annotation-switch" type="checkbox" name="annotation-switch"
                 class="switch is-rounded is-small" checked="checked">
-              <label for="annotation-switch">Annotation mode</label>
-              <!-- <input type="text" class="input" id="user-confidence" placeholder="Enter confidnece level" value="0.95"> -->
+              <label for="annotation-switch">Режим аннотирования</label>
             </div>
-            </div>
+            </div> -->
             <div class="navbar-item">
           <div class="field">
             <input id="dark-mode-switch" type="checkbox" name="dark-mode-switch" class="switch is-rounded is-small">
-            <label for="dark-mode-switch">Dark mode</label>
+            <label for="dark-mode-switch">Ночной режим</label>
           </div>
           </div>
 
         </div>
       </div>
       <a class="navbar-item" id="modal-button">
-        Help
+        Справка
       </a>
 
     <div id="navbarBasicExample" class="navbar-menu">
@@ -336,10 +332,20 @@
 
 
               <h1 class="title is-4">Annotations</h1>
-
+              <a href="#" onclick="RemoveAnnotation()" href="javascript:void(0);" >
+                <span class="icon is-medium">
+                  <i class="fas fa-trash" aria-hidden="true"></i>
+                </span>
+Удалить аннотацию
+              </a>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
-                <span class="tag is-medium single-line accordion-category category-1" contenteditable="true">Category
+                <a href="#" class="tag" catid='1'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
+                <span class="tag is-medium single-line accordion-category category-1"  contenteditable="true">Category
                   1</span>
 
                 <a href="#" class="accordion-down" aria-label="more options">
@@ -347,6 +353,7 @@
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
                 </a>
+
               </div>
               <div class="panel">
                 <div class="block">
@@ -356,6 +363,11 @@
               </div>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='2'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-medium single-line accordion-category category-2" contenteditable="true">Category 2</span>
 
                 <a href="#" class="accordion-down" aria-label="more options">
@@ -371,6 +383,11 @@
                 </div>
               </div>
               <div class="accordion">
+                <a href="#" class="tag" catid='3'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
                 <span class="tag is-light is-medium single-line accordion-category category-3"
                   contenteditable="true">Category 3</span>
@@ -389,6 +406,11 @@
               </div>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='4'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-4"
                   contenteditable="true">Category 4</span>
 
@@ -406,6 +428,11 @@
               </div>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='5'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-5"
                   contenteditable="true">Category 5</span>
 
@@ -423,6 +450,11 @@
               </div>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='6'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-6"
                   contenteditable="true">Category 6</span>
 
@@ -440,6 +472,11 @@
               </div>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='7'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-7"
                   contenteditable="true">Category 7</span>
 
@@ -458,6 +495,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='8'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-8"
                   contenteditable="true">Category 8</span>
 
@@ -476,6 +518,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='9'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-9"
                   contenteditable="true">Category 9</span>
 
@@ -494,6 +541,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='10'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-10"
                   contenteditable="true">Category 10</span>
 
@@ -512,6 +564,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='11'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-11"
                   contenteditable="true">Category 11</span>
 
@@ -530,6 +587,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='12'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-12"
                   contenteditable="true">Category 12</span>
 
@@ -545,9 +607,13 @@
                   <div class="annotation-content annotation-content-12"></div>
                 </div>
               </div>
-
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='13'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-13"
                   contenteditable="true">Category 13</span>
 
@@ -566,6 +632,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='14'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-14"
                   contenteditable="true">Category 14</span>
 
@@ -584,6 +655,11 @@
 
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
+                <a href="#" class="tag" catid='15'>
+                  <span class="icon is-medium">
+                    <i class="fas fa-pen" aria-hidden="true"></i>
+                  </span>
+                </a>
                 <span class="tag is-light is-medium single-line accordion-category category-15"
                   contenteditable="true">Category 15</span>
 
@@ -643,16 +719,20 @@
       <!-- Any other Bulma elements you want -->
       <section class="modal-card-body">
         <div class="content">
-          <h1>How to use Transcription Buddy</h1>
-          <h2>Loading audio</h2>
-          <p>How do you do that</p>
-          <h2>Loading transcript</h2>
-          <p></p>
+          <h1>Как использовать Я.Транскрипт</h1>
+          <h2>Загрузите аудио</h2>
+          <p>Файл - Загрузить аудио, появится выбор локальных файлов. К сожалению аудио нужно загружать каждый раз при обновлении страницы</p>
+          <h2>Загрузите транскрипт</h2>
+          <p>Файл - Загрузить транскрипт, поддерживаются транскрипты Yandex Cloud STT</p>
+          <h2>Навигация по транскрипту</h2>
+          <p>По умолчанию при клике по слову воспроизведение аудио начнется с этого места. Что бы выключить, отключите настройку "Прокручивать аудио"</p>
+          <h2>Аннотирование</h2>
+          <p>Если выделить больше 1 слова, то можно отметить его тегом из списка справа. Названия тегов можно редактировать прямо в этом списке.</p>
 
         </div>
       </section>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
+    <!-- <button class="modal-close is-large" aria-label="close"></button> -->
   </div>
 
 
