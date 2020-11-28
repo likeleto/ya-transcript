@@ -105,7 +105,7 @@ function handleFileSelect(evt) {
         // Render thumbnail.
 
         document.getElementById("hyperplayer").src = e.target.result;
-        document.getElementById("hyperplayer").playbackRate = 2;
+        //document.getElementById("hyperplayer").playbackRate = 2;
         console.log(theFile.name);
         document.getElementById("audio-name").innerHTML = theFile.name;
 

@@ -101,6 +101,8 @@ $(document).ready(function () {
     var isPlaying = false;
     var playbackRate = 2.0;
 
+    myAudio.playbackRate = playbackRate;
+
     // select and highlight the clicked word (ready to be edited)
     // checks if the element clicked has a data confidence value, which implies it's a word
     $('#content').on("click", "span", function () {
