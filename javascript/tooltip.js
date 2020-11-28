@@ -4,9 +4,9 @@ var drop;
 var selectedText;
 
 function highlight(element) {
-  if(element) {
+  if (element) {
     $(element).addClass("highlightt");
-    setTimeout(function () {
+    setTimeout(function() {
       $(element).removeClass('highlightt');
     }, 3000);
   }
@@ -15,8 +15,8 @@ function highlight(element) {
 
 $(document).click(function(event) {
   $target = $(event.target);
-  if(!$target.closest('#tweet-box').length &&
-  $('#tweet-box').is(":visible")) {
+  if (!$target.closest('#tweet-box').length &&
+    $('#tweet-box').is(":visible")) {
     // $('#menucontainer').hide();
     closeDrop();
   }
@@ -26,7 +26,7 @@ $(document).click(function(event) {
 // twttr.widgets.load();
 
 var contentss = $('.category-1').html();
-$('.category-1').blur(function () {
+$('.category-1').blur(function() {
   if (contentss != $(this).html()) {
     contentss = $(this).html();
   }
@@ -34,7 +34,9 @@ $('.category-1').blur(function () {
 
 // this function is activated on mouseup after user has highlighted text
 function addShareTool(a, previousSelection) {
-console.log('addShareTool')
+  //not used
+
+  console.log('addShareTool')
   // if annotation mode on
   var annotaionCheckbox = document.getElementById("annotation-switch").checked;
   if (annotaionCheckbox) {
@@ -47,12 +49,12 @@ console.log('addShareTool')
 
 
 
-if (selection.toString() !== '') {
-  if (drop) {
-    drop.close();
-    drop.remove();
-    drop = null;
-  }
+    if (selection.toString() !== '') {
+      if (drop) {
+        drop.close();
+        drop.remove();
+        drop = null;
+      }
       anchorNode = selection.anchorNode.parentNode;
       focusNode = selection.focusNode.parentNode;
 
@@ -81,19 +83,19 @@ if (selection.toString() !== '') {
           '&d=' +
           (anchorNodeTime + anchorNodeDuration - focusNodeTime);
       }
-if (!drop){
-      drop = new Drop({
-        target: anchorNode,
-        classes: 'drop-theme-basic',
-        position: 'top center',
-        constrainToWindow: true,
-        constrainToScrollParent: true,
-        openOn: 'always',
-        content: '<div id="tweet-box"></div>',
-      });
+      if (!drop) {
+        drop = new Drop({
+          target: anchorNode,
+          classes: 'drop-theme-basic',
+          position: 'top center',
+          constrainToWindow: true,
+          constrainToScrollParent: true,
+          openOn: 'always',
+          content: '<div id="tweet-box"></div>',
+        });
 
-      drop.on('open', fillShare, false);
-}
+        drop.on('open', fillShare, false);
+      }
       /*<a class="sharelink" href="#"><span class="icon-twitter"></span><span style="padding-left:40px">Share this text + video on Twitter</span></a>*/
     }
   }
@@ -102,7 +104,7 @@ if (!drop){
 }
 
 function fillShare() {
-
+  //not used
   // think can get rid of some of this function, since some of it was used to generate the tweet
 
   var url = window.location.href;
@@ -199,10 +201,10 @@ var $textarea = $('#content');
 function RemoveAnnotation() {
   selection = window.getSelection();
   var fragment = selection.getRangeAt(0).cloneContents();
-  if (fragment.firstElementChild.getAttribute('data-m')){
+  if (fragment.firstElementChild.getAttribute('data-m')) {
 
     var firstElement = fragment.firstElementChild;
-  }else{
+  } else {
     var firstElement = fragment.firstElementChild.firstElementChild;
   }
 
@@ -267,7 +269,10 @@ function SelectText(n) {
 
   // Make sure something was selected
   if (!selection.rangeCount) {
-    closeDrop();
+    //    closeDrop();
+    return;
+  }
+  if (selection.type != 'Range') {
     return;
   }
 
@@ -285,7 +290,7 @@ function SelectText(n) {
   // get the time attribute from the first element
 
   // check whether more than a word has been selected
-  if (firstElement) {
+  if (firstElement && firstElement.tagName == 'SPAN') {
 
     var firstElementStartTime = firstElement.getAttribute('data-m');
 
@@ -326,11 +331,16 @@ function SelectText(n) {
     // var spn = '<span class="selected">' + selectedText + '</span>';
     // window.getSelection().html().replace(selectedText, "");
 
+  } else if (firstElement && firstElement.tagName == 'P') {
+    console.log('outside papagraph');
+    alert('Сорян, но нельзя выделить текст в двух параграфах. Объедени параграфы и попробуй снова.')
   } else {
     console.log('just a fragment');
+    alert('Сорян, но нельзя выделить только одно слово. Выбери побольше текста и попробуй снова.')
+
   }
 
-closeDrop();
+  closeDrop();
 
 }
 
@@ -385,6 +395,12 @@ function closeDrop() {
 }
 
 var transcript = document.getElementById('hypertranscript');
-transcript.addEventListener('mouseup', addShareTool, false);
-transcript.addEventListener('touchend', addShareTool, false);
+//transcript.addEventListener('mouseup', addShareTool, false);
+//transcript.addEventListener('touchend', addShareTool, false);
 transcript.addEventListener('click', closeDrop, true);
+
+$(document).ready(function() {
+  $('.tag').click(function(event) {
+    SelectText(Number($(this).attr('catid')));
+  });
+});
