@@ -85,7 +85,7 @@ $(document).ready(function () {
         window.localStorage.setItem("autoscroll-off", autoscrollCheckbox);
         console.log("new autoscroll value:" + autoscrollCheckbox);
         if (autoscrollCheckbox == true) {
-            hyper()
+            hyper(true)
         }
         autoscrollOff();
     });
@@ -191,6 +191,7 @@ function loadSavedText() {
             if (previousCheck == "false") {
                 console.log("no autosave");
                 document.getElementById("autosave").checked = false;
+                initHyper();
                 // uncomment for automatic display
                 // displayTranscript()
             } else if (previousCheck == "true") {
@@ -199,9 +200,12 @@ function loadSavedText() {
                 startTimer();
 
                 if (localStorage.getItem("saved-text")) {
+                    clearTranscript();
+                    document.getElementById("hyperplayer").src = '';
                     var storedText = localStorage.getItem("saved-text");
                     console.log("saved data found");
                     document.getElementById("content").innerHTML = document.getElementById("content").innerHTML + storedText;
+                    buildTimes();
                 }
                 // TODO save more for each one
 
@@ -253,6 +257,7 @@ function loadSavedText() {
         }
     } else {
         //document.getElementById("result").innerHTML = "Sorry, autosave didn't work :'(";
+        initHyper();
     }
 }
 $(document).ready(function () {

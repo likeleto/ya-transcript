@@ -333,10 +333,10 @@ function SelectText(n) {
 
   } else if (firstElement && firstElement.tagName == 'P') {
     console.log('outside papagraph');
-    alert('Сорян, но нельзя выделить текст в двух параграфах. Объедени параграфы и попробуй снова.')
+    alert('Сори, нельзя выделить текст в двух параграфах. Объедените параграфы и попробуйте снова.')
   } else {
     console.log('just a fragment');
-    alert('Сорян, но нельзя выделить только одно слово. Выбери побольше текста и попробуй снова.')
+    alert('Сори, нельзя выделить только одно слово. Выберите побольше текста и попробуйте снова.')
 
   }
 
@@ -400,7 +400,7 @@ var transcript = document.getElementById('hypertranscript');
 transcript.addEventListener('click', closeDrop, true);
 
 $(document).ready(function() {
-  $('.tag').click(function(event) {
+  $('.tag-icon').click(function(event) {
     SelectText(Number($(this).attr('catid')));
   });
 });

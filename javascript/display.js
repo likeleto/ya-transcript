@@ -48,7 +48,8 @@ function fmtMSS(s) {
 }
 
 function clearTranscript() {
-  $('#content').html('')
+  $('#content').html('');
+  $('#times').html('')
   $('.annotation-content').html('');
 }
 
@@ -61,7 +62,7 @@ function CreateNewPara(timeOfFirstWord, speaker, paraId) {
   var paraFormattedTime = "<span class ='timecode'>" + formattedTime + "</span>";
   var endPara = "</p>"
   //var newPara = paraTime + paraSpeaker + paraFormattedTime + endPara;
-//remove speaket and time inplece switch to buildTimes func
+  //remove speaket and time inplece switch to buildTimes func
   var newPara = paraTime + endPara;
   return newPara;
 }
@@ -249,6 +250,7 @@ document.getElementById('user-project-file').addEventListener('change', handlePr
 
 // load transcript on start
 // displayTranscript()
+
 
 
 // for the audio control (possibly to be deleted eventually)
@@ -620,105 +622,107 @@ function displayTranscript(userJson) {
     // then to append words to that paragraph
     // then when speaker changes to create a new para
     for (var j = 0; j < jsonLength; j++) {
-      chunk = results[j].alternatives[0].words;
-      chunkLength = chunk.length;
+      if (results[j].channelTag == '1') {
+        chunk = results[j].alternatives[0].words;
+        chunkLength = chunk.length;
 
-      if (j == 0) {
+        if (j == 0) {
 
-        new_speaker = "New Para";
+          new_speaker = "New Para";
 
-        // add new para
-        // function takes: timeOfFirstWord, speaker, wordCount
-        paraId = "para-" + paragraphCounter;
-        newPara = CreateNewPara(word_start_time, new_speaker, paraId);
-        $('#content').append(newPara);
+          // add new para
+          // function takes: timeOfFirstWord, speaker, wordCount
+          paraId = "para-" + paragraphCounter;
+          newPara = CreateNewPara('0', new_speaker, paraId);
+          $('#content').append(newPara);
 
-      };
+        };
 
-      for (var i = 0; i < chunkLength; i++) {
-        // get data from JSON string
-        wordLabel = chunk[i].word;
-        startTimeLabel = Number(chunk[i]["startTime"].substr(0,chunk[i]["startTime"].length-1));
-        durationLabel = Number(chunk[i]["endTime"].substr(0,chunk[i]["endTime"].length-1)) - Number(chunk[i]["startTime"].substr(0,chunk[i]["startTime"].length-1));
-
-
-        word = chunk[i].word;
-        // word start time is in seconds
-
-        // create an manual adjustment to data when there is a playback sync error
-        // word highlighting too early means data time is too low, so make it higher
-        // word highlighting too late means data time is too high, so make it lower
-        var adjustment = 0;
-        // var delay = $("#user-delay").val();
-        // // adjustment = Number(delay);
-        // console.log("adjustment: " + adjustment);
-
-        word_start_time = startTimeLabel + adjustment;
-        word_start_time_ms = word_start_time * 1000
-
-        // if (chunk[i + 1] && chunk[i + 1].start_time) {
-        //   next_word_start_time = chunk[i + 1].start_time;
-        //   // TODO truncaste this as it can go to lots of decimal places
-        //   // duration_ms = Math.round(1000 * (next_word_start_time - word_start_time))
-        //
-        // } else if (chunk[i + 2] && chunk[i + 2].start_time) {
-        //   next_word_start_time = chunk[i + 2].start_time;
-        //   // TODO truncaste this as it can go to lots of decimal places
-        //   // duration_ms = Math.round(1000 * (next_word_start_time - word_start_time))
-        // }
-
-        duration_ms = 1000 * durationLabel;
+        for (var i = 0; i < chunkLength; i++) {
+          // get data from JSON string
+          wordLabel = chunk[i].word;
+          startTimeLabel = Number(chunk[i]["startTime"].substr(0, chunk[i]["startTime"].length - 1));
+          durationLabel = Number(chunk[i]["endTime"].substr(0, chunk[i]["endTime"].length - 1)) - Number(chunk[i]["startTime"].substr(0, chunk[i]["startTime"].length - 1));
 
 
+          word = chunk[i].word;
+          // word start time is in seconds
+
+          // create an manual adjustment to data when there is a playback sync error
+          // word highlighting too early means data time is too low, so make it higher
+          // word highlighting too late means data time is too high, so make it lower
+          var adjustment = 0;
+          // var delay = $("#user-delay").val();
+          // // adjustment = Number(delay);
+          // console.log("adjustment: " + adjustment);
+
+          word_start_time = startTimeLabel + adjustment;
+          word_start_time_ms = word_start_time * 1000
+
+          // if (chunk[i + 1] && chunk[i + 1].start_time) {
+          //   next_word_start_time = chunk[i + 1].start_time;
+          //   // TODO truncaste this as it can go to lots of decimal places
+          //   // duration_ms = Math.round(1000 * (next_word_start_time - word_start_time))
+          //
+          // } else if (chunk[i + 2] && chunk[i + 2].start_time) {
+          //   next_word_start_time = chunk[i + 2].start_time;
+          //   // TODO truncaste this as it can go to lots of decimal places
+          //   // duration_ms = Math.round(1000 * (next_word_start_time - word_start_time))
+          // }
+
+          duration_ms = 1000 * durationLabel;
 
 
-        // add data to each word: confidence, start time, duration, speaker
-        spanStartTime = "<span data-m='" + word_start_time_ms + "' data-d='" + duration_ms + "' data-confidence='" + confidence + "'>";
-        // create html to be added
-
-        space = " ";
-
-        text = space + spanStartTime + word + "</span>";
-
-        // Uncomment out below to use tooltips
-        // spanTooltip = "<span class='tooltiptext'>";
-        // divTooltip = "<div class='tooltip'>";
-        // text = space + divTooltip + spanStartTime + word + "</span>" + spanTooltip + confidence + "<br>" + word_start_time + "</span>" + "</div>";
-
-        // append text to paragraph
-        para = "#para-" + paragraphCounter;
-
-        $(para).append(text);
-
-        // if it gets to a full stop and the current paragraph is too long, start a new paragraph
-        // TODO let user set the paragraph amount
-        //var max_para_length = 35;
 
 
-        //for (var i = 0; i < speaker_times.length; i++) {
-        //console.log(speaker_times[i]);
-        //}
-        paragraphWordCounter++
+          // add data to each word: confidence, start time, duration, speaker
+          spanStartTime = "<span data-m='" + word_start_time_ms + "' data-d='" + duration_ms + "' data-confidence='" + confidence + "'>";
+          // create html to be added
 
-        //if (paragraphWordCounter > max_para_length) {
+          space = " ";
+
+          text = space + spanStartTime + word + "</span>";
+
+          // Uncomment out below to use tooltips
+          // spanTooltip = "<span class='tooltiptext'>";
+          // divTooltip = "<div class='tooltip'>";
+          // text = space + divTooltip + spanStartTime + word + "</span>" + spanTooltip + confidence + "<br>" + word_start_time + "</span>" + "</div>";
+
+          // append text to paragraph
+          para = "#para-" + paragraphCounter;
+
+          $(para).append(text);
+
+          // if it gets to a full stop and the current paragraph is too long, start a new paragraph
+          // TODO let user set the paragraph amount
+          //var max_para_length = 35;
+
+
+          //for (var i = 0; i < speaker_times.length; i++) {
+          //console.log(speaker_times[i]);
+          //}
+          paragraphWordCounter++
+
+          //if (paragraphWordCounter > max_para_length) {
           // set data for new speaker
 
 
-        //};
+          //};
 
-      };
-      if ((j % 4)== 0) {
-        paragraphCounter++;
-        paraId = "para-" + paragraphCounter;
-        newPara = CreateNewPara(word_start_time, new_speaker, paraId);
-        $('#content').append(newPara);
-        // reset the paragraph word counter
-        paragraphWordCounter = 0;
-        // console.log(word);
-        // console.log('para too long');
+        };
+        if ((j % 4) == 0) {
+          paragraphCounter++;
+          paraId = "para-" + paragraphCounter;
+          newPara = CreateNewPara(word_start_time, new_speaker, paraId);
+          $('#content').append(newPara);
+          // reset the paragraph word counter
+          paragraphWordCounter = 0;
+          // console.log(word);
+          // console.log('para too long');
+        }
+
       }
-
-    };
+    }
     buildTimes()
   }
 
@@ -729,8 +733,13 @@ function displayTranscript(userJson) {
   $('.whole').html(obj);
 
   // });
+  initHyper();
 
 
+
+};
+
+function initHyper(){
   var autoScrollCheck = document.getElementById("autoscroll-off").checked;
   if (autoScrollCheck) {
     setTimeout(
@@ -740,11 +749,7 @@ function displayTranscript(userJson) {
 
       }, 1000)
   }
-
-};
-
-// Link
-
+}
 
 // copy to clipboard
 function CopyToClipboard(containerid) {
