@@ -68,7 +68,7 @@ function exportToCsv() {
         return finalVal + '\n';
     };
 
-    let csvFile = 'sep=,' + '\n';
+    let csvFile = 'Категория,Время(сек),Время(мм:сс),Транскрипт' + '\n';
     for (var i = 0; i < rows.length; i++) {
         csvFile += processRow(rows[i]);
     }
