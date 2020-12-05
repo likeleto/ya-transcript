@@ -1,32 +1,15 @@
 // script to autosave to local storage
 
 
-
-// export transcrpt
-// function exportToTxt() {
-//     console.log('saving');
-//     var blob = new Blob(["Welcome to Websparrow.org."],
-//         { type: "text/plain;charset=utf-8" });
-//     saveAs(blob, "static.txt");
-// }
-
-// function exportToTxt() {
-//     var content = "bla"
-//     var fileName = "blo.txt"
-//     var contentType = "text/plain;charset=utf-8"
-//     var a = document.createElement("a");
-//     var file = new Blob([content], {type: contentType});
-//     a.href = URL.createObjectURL(file);
-//     a.downloadd = fileName;
-//     a.click();
-// }
-// downloadd(jsonData, 'json.txt', 'text/plain');
-
 // export just text to file
 function exportToTxt() {
     var filename = "transcript.txt";
     // var text = document.getElementById("content").innerHTML;
-    var text = document.getElementById("content").textContent;
+    var items = document.getElementById("content").getElementsByClassName('content');
+    var text = '';
+    for (i = 0; i < items.length; i++) {
+      text += items[i].getAttribute('data-tc') + ' ' + items[i].innerText + '\n\n';
+    }
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
@@ -43,7 +26,8 @@ function exportToTxt() {
 function exportToHtml() {
     var userFilename = $('#save-html-name').val();
 
-    var filename = userFilename;
+
+    var filename = 'project.txt';
     console.log('saving: ' + filename);
     var text = document.getElementById("content").innerHTML;
     var element = document.createElement('a');
@@ -257,10 +241,11 @@ function loadSavedText() {
         }
     } else {
         //document.getElementById("result").innerHTML = "Sorry, autosave didn't work :'(";
-        initHyper();
+
     }
 }
 $(document).ready(function () {
+initHyper();
     loadSavedText();
 
 })

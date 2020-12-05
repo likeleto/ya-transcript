@@ -7,6 +7,7 @@
     --selected-pink: #f8cde6;
     --selected-green: #cde7e2;
     --selected-purple: #e1d2f9;
+
     --primary-text: #1a1916;
     --body-bg: #fafafa;
     --body-color: #555;
@@ -218,6 +219,9 @@ body, html {
     min-width: 250px;
     height: auto !important;
     box-shadow:none !important;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .full-width {
