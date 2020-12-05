@@ -87,6 +87,7 @@ function handleFileSelect(evt) {
 
     // Only process audio files.
     if (!f.type.match('audio.*')) {
+      alert('file not audio')
       console.log('file not audio');
       return;
     };
@@ -94,6 +95,7 @@ function handleFileSelect(evt) {
     // Only process if size is smaller than 30mb
     fileSize = Math.round(files[0].size / 1000000)
     if (fileSize > 61.457280) {
+      alert('file is ' + fileSize + 'mb. but max file size is 60mb')
       console.log('file is ' + fileSize + 'mb. but max file size is 60mb');
       return;
     }
@@ -108,7 +110,7 @@ function handleFileSelect(evt) {
         document.getElementById("hyperplayer").src = e.target.result;
         //document.getElementById("hyperplayer").playbackRate = 2;
         console.log(theFile.name);
-        document.getElementById("audio-name").innerHTML = theFile.name;
+        //document.getElementById("audio-name").innerHTML = theFile.name;
 
         // var span = document.createElement('span');
         // span.innerHTML = ['<img class="thumb" src="', e.target.result,
@@ -170,7 +172,7 @@ function handleJsonFileSelect(evt) {
         // Render thumbnail.
 
         console.log(theFile.name);
-        document.getElementById("json-name").innerHTML = theFile.name;
+        //document.getElementById("json-name").innerHTML = theFile.name;
         console.log(e);
         JsonObj = JSON.parse(e.target.result);
         console.log(JsonObj);
@@ -219,9 +221,9 @@ function handleProjectFileSelect(evt) {
         // Render thumbnail.
 
         console.log("loading project:" + theFile.name);
-        document.getElementById("project-name").innerHTML = theFile.name;
+        //document.getElementById("project-name").innerHTML = theFile.name;
         $("#content").html(e.target.result)
-
+        buildTimes();
         // var span = document.createElement('span');
         // span.innerHTML = ['<img class="thumb" src="', e.target.result,
         //     '" title="', escape(theFile.name), '"/>'
@@ -260,7 +262,7 @@ var word_start_time;
 
 function displayTranscript(userJson) {
 
-
+clearTranscript();
   // get json transcript from user input (default transcript.json)
   // var json = "json/" + document.getElementById("user-filename").value;
   // console.log("loading: " + json);
