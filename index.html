@@ -56,24 +56,20 @@
       </a> -->
     </div>
     <div class="navbar-item has-dropdown has-dropdown is-hoverable">
-      <a class="navbar-link">
+      <a class="navbar-link is-arrowless">
         Файл
       </a>
       <div class="navbar-dropdown">
-        <div class="navbar-item">
-          <div class="field">
-            <button class="button is-small is-primary" onclick="clearTranscript()">Новый</button>
-          </div>
-        </div>
-        <hr class="navbar-divider">
-        <div class="navbar-item">
 
-          <div class="field has-addons">
+
+        <!-- <div class="navbar-item">
+
+          <div class="field has-addons"> -->
 
             <!-- user audio input -->
 
             <!-- for file api input  -->
-            <div class="file has-name is-small is-primary">
+            <!-- <div class="file has-name is-small is-primary">
               <label class="file-label">
                 <input id="user-audio-file" class="file-input" type="file" name="resume">
                 <span class="file-cta">
@@ -88,7 +84,7 @@
                   не выбрано
                 </span>
               </label>
-            </div>
+            </div> -->
             <!-- <p class="control">
             <input type="text" class="input" id="audioUrl" placeholder="Enter audio filename" value="audio.mp3">
           </p>
@@ -108,13 +104,12 @@
             <p class="control">
               <button onclick="getAudioUrl()" class="button is-small is-primary">Load</button>
             </p> -->
-          </div>
-        </div>
-        <div class="navbar-item">
-          <div class="field has-addons">
+          <!-- </div>
+        </div> -->
+        <!-- <div class="navbar-item">
+          <div class="field has-addons"> -->
 
-            <!-- for file api input  -->
-            <div class="file has-name is-small is-primary">
+            <!-- <div class="file has-name is-small is-primary">
               <label class="file-label">
                 <input id="user-json-file" class="file-input" type="file" name="resume">
                 <span class="file-cta">
@@ -129,7 +124,7 @@
                   не выбрано
                 </span>
               </label>
-            </div>
+            </div> -->
 
             <!-- <p class="control">
             <input type="text" class="input" id="user-filename" placeholder="Enter json filename"
@@ -147,12 +142,10 @@
             <p class="control">
               <button onclick="displayTranscript()" class="button is-small is-primary">Load</button>
             </p>  -->
-          </div>
-        </div>
-        <hr class="navbar-divider">
-        <div class="navbar-item">
+          <!-- </div>
+        </div> -->
+        <!-- <div class="navbar-item">
           <div class="field has-addons">
-            <!-- for file api input  -->
             <div class="file has-name is-small is-primary">
               <label class="file-label">
                 <input id="user-project-file" class="file-input" type="file" name="resume">
@@ -168,7 +161,7 @@
                   не выбрано
                 </span>
               </label>
-            </div>
+            </div> -->
 
             <!-- <div class="control">
               <div class="select is-small is-fullwidth">
@@ -180,9 +173,9 @@
             <p class="control">
               <button onclick="LoadFromHtml()" class="button is-small is-primary">Load Project</button>
             </p> -->
-          </div>
-        </div>
-        <div class="navbar-item">
+          <!-- </div>
+        </div> -->
+        <!-- <div class="navbar-item">
           <div class="field has-addons">
             <div class="control">
               <input class="input is-small" type="text" placeholder="Project name" name="country" id="save-html-name">
@@ -193,99 +186,95 @@
               <button class="button is-small is-primary disabled" name="export-html" onclick="exportToHtml()">Скачать проект</button>
             </p>
           </div>
-        </div>
+        </div> -->
+        <a  name="" class="navbar-item">Загрузить json <input id="user-json-file" class="file-input" type="file" name="resume">
+</a>
+        <a  name="" class="navbar-item">Загрузить аудио         <input id="user-audio-file" class="file-input" type="file" name="resume">
+</a>
 
-      </div>
-    </div>
-    <div class="navbar-item has-dropdown has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Экспорт
-      </a>
-      <div class="navbar-dropdown">
-        <div class="navbar-item">
-          <div class="buttons">
-            <div class="field">
-              <button class="button is-small is-primary disabled" name="export-transcript" onclick="exportToTxt()">Транскрипт</button>
-            </div>
-          </div>
-        </div>
-        <div class="navbar-item">
-          <div class="buttons">
-            <div class="field">
-              <button class="button is-small is-primary" name="export-to-csv" onclick="exportToCsv()">Аннотации</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="navbar-item has-dropdown has-dropdown is-hoverable">
-      <a class="navbar-link">
-          Настройки
-        </a>
-      <div class="navbar-dropdown">
+        <hr class="navbar-divider">
+
+
+
+
         <div class="navbar-item">
           <div class="field">
             <input id="autosave" type="checkbox" name="autosave" class="switch is-rounded is-small">
             <label for="autosave">Автосохранение</label>
-            <div class="field"></div>
-            <input id="autoscroll-off" type="checkbox" name="autoscroll-off" class="switch is-rounded is-small" checked="checked" value="autoscroll-off">
-            <label for="autoscroll-off">Прокручивать аудио</label>
           </div>
         </div>
-        <div class="navbar-item">
-          <div class="field">
-            <input id="confidence" type="checkbox" name="confidence" class="switch is-rounded is-small" checked="">
-            <label for="confidence">Качество распознования</label>
-            <!-- <input type="text" class="input" id="user-confidence" placeholder="Enter confidnece level" value="0.95"> -->
-          </div>
-        </div>
-        <!-- <div class="navbar-item">
-            <div class="field">
-              <input id="annotation-switch" type="checkbox" name="annotation-switch"
-                class="switch is-rounded is-small" checked="checked">
-              <label for="annotation-switch">Режим аннотирования</label>
-            </div>
-            </div> -->
-        <div class="navbar-item">
-          <div class="field">
-            <input id="dark-mode-switch" type="checkbox" name="dark-mode-switch" class="switch is-rounded is-small">
-            <label for="dark-mode-switch">Ночной режим</label>
-          </div>
-        </div>
+        <hr class="navbar-divider">
+
+        <a  name="" class="navbar-item">Загрузить проект         <input id="user-project-file" class="file-input" type="file" name="resume">
+</a>
+
+        <a  onclick="exportToHtml()" name="export-html" class="navbar-item">Скачать проект</a>
+        <hr class="navbar-divider">
+        <a  onclick="exportToTxt()" name="export-transcript" class="navbar-item">Экспорт транскрипта</a>
+        <a  onclick="exportToCsv()" name="export-to-csv" class="navbar-item">Экспорт аннотаций</a>
+        <hr class="navbar-divider">
+
+        <a  onclick="clearTranscript()" name="clear" class="navbar-item">Очистить</a>
 
       </div>
     </div>
-    <a class="navbar-item" id="modal-button">
-        Справка
-      </a>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-
+    <div class="navbar-item" style="flex-grow: 2 !important;">
+      <div class="gap-example field audio-container">
+        <audio id="hyperplayer" style="z-index: 5000000; position:relative; height:calc(100% - 40px)">
+        <source src="data/demo.opus" type="audio/mpeg">
+      </audio>
       </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="gap-example field audio-container">
-            <audio id="hyperplayer" style="z-index: 5000000; position:relative; height:calc(100% - 40px)">
-              <source src="data/demo.opus" type="audio/mpeg">
-            </audio>
-          </div>
-        </div>
-
-        <div class="navbar-item">
-          <!-- <button id="modal-button" class="button is-small is-primary is-large modal-button" data-target="modal" aria-haspopup="true" onclick="modal()">Launch example modal</button> -->
+    </div>
 
 
 
-          <a class="navbar-item" href="https://github.com/likeleto/ya-transcript" target="_blank">
+        <div class="navbar-end">
+
+          <div class="navbar-item has-dropdown has-dropdown is-hoverable">
+            <a class="navbar-link is-arrowless">
+                <i class="fas fa-cog fa-lg"></i>
+              </a>
+            <div class="navbar-dropdown is-right">
+
+                <div class="navbar-item">
+                  <div class="field">
+                    <input id="autoscroll-off" type="checkbox" name="autoscroll-off" class="switch is-rounded is-small" checked="checked" value="autoscroll-off">
+                    <label for="autoscroll-off">Прокручивать аудио</label>
+                  </div>
+                </div>
+                <div class="navbar-item">
+                  <div class="field">
+                    <input id="confidence" type="checkbox" name="confidence" class="switch is-rounded is-small" checked="">
+                    <label for="confidence">Качество распознования</label>
+                    <!-- <input type="text" class="input" id="user-confidence" placeholder="Enter confidnece level" value="0.95"> -->
+                  </div>
+                </div>
+                <!-- <div class="navbar-item">
+                  <div class="field">
+                    <input id="annotation-switch" type="checkbox" name="annotation-switch"
+                      class="switch is-rounded is-small" checked="checked">
+                    <label for="annotation-switch">Режим аннотирования</label>
+                  </div>
+                  </div> -->
+                <div class="navbar-item">
+                  <div class="field">
+                    <input id="dark-mode-switch" type="checkbox" name="dark-mode-switch" class="switch is-rounded is-small">
+                    <label for="dark-mode-switch">Ночной режим</label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <a class="navbar-item" id="modal-button">
+                  <i class="fas fa-question-circle fa-lg"></i>
+            </a>
+            <a class="navbar-item" href="https://github.com/likeleto/ya-transcript" target="_blank">
 
             <i class="fab fa-github fa-lg"></i>
           </a>
 
+
         </div>
-      </div>
-    </div>
   </nav>
 
 
@@ -356,7 +345,7 @@
 
 
                     </section>
-                    <section id="times"><span style="top: 0px;">0:00</span><span style="top: 72px;">0:07</span><span style="top: 144px;">0:14</span><span style="top: 240px;">0:14</span></section>
+                    <section id="times"><span style="top: 0px;">0:00</span><span style="top: 72px;">0:07</span><span style="top: 144px;">0:14</span><span style="top: 240px;">0:27</span></section>
                   </article>
                 </div>
               </div>
@@ -368,17 +357,14 @@
 
 
 
-        <div class="column is-3">
-          <section class="section annotation-section scroller">
+        <div class="column is-3" style="padding-top:0; !important">
+          <section class="section annotation-section scroller"  style="padding-top:0;  !important">
             <div class="block">
-
-
-              <h1 class="title is-4">Annotations</h1>
               <a href="#" onclick="RemoveAnnotation()" href="javascript:void(0);">
                 <span class="icon is-medium">
                   <i class="fas fa-trash" aria-hidden="true"></i>
                 </span>
-Удалить аннотацию
+Выделить и удалить аннотацию
               </a>
               <div class="accordion">
                 <!-- <span class="single-line" contenteditable="true">Component</span> -->
@@ -387,8 +373,7 @@
                     <i class="fas fa-highlighter" aria-hidden="true"></i>
                   </span>
                 </a>
-                <span class="tag is-medium single-line accordion-category category-1" contenteditable="true">Category
-                  1</span>
+                <span class="tag is-medium single-line accordion-category category-1" contenteditable="true">Category 1</span>
 
                 <a href="#" class="accordion-down" aria-label="more options">
                   <span class="icon is-medium">
@@ -399,7 +384,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-1"></div>
                 </div>
               </div>
@@ -420,7 +405,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-2"></div>
                 </div>
               </div>
@@ -441,7 +426,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-3"></div>
                 </div>
               </div>
@@ -462,7 +447,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-4"></div>
                 </div>
               </div>
@@ -483,7 +468,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-5"></div>
                 </div>
               </div>
@@ -504,7 +489,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-6"></div>
                 </div>
               </div>
@@ -525,7 +510,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-7"></div>
                 </div>
               </div>
@@ -547,7 +532,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-8"></div>
                 </div>
               </div>
@@ -569,7 +554,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-9"></div>
                 </div>
               </div>
@@ -591,7 +576,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-10"></div>
                 </div>
               </div>
@@ -613,7 +598,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-11"></div>
                 </div>
               </div>
@@ -635,7 +620,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-12"></div>
                 </div>
               </div>
@@ -656,7 +641,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-13"></div>
                 </div>
               </div>
@@ -678,7 +663,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-14"></div>
                 </div>
               </div>
@@ -700,7 +685,7 @@
               </div>
               <div class="panel">
                 <div class="block">
-                  <h4>Annotations:</h4>
+
                   <div class="annotation-content annotation-content-15"></div>
                 </div>
               </div>
