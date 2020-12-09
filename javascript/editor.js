@@ -99,7 +99,7 @@ $(document).ready(function () {
     // load audio
     var myAudio = document.getElementById("hyperplayer");
     var isPlaying = false;
-    var playbackRate = 2.0;
+    var playbackRate = 1.0;
 
     myAudio.playbackRate = playbackRate;
 
@@ -126,7 +126,7 @@ $(document).ready(function () {
 
     // toggle play and pause
     function togglePlay() {
-      myAudio.playbackRate = 2;
+      //myAudio.playbackRate = 1;
 
         if (isPlaying) {
             myAudio.pause();
@@ -142,39 +142,35 @@ $(document).ready(function () {
     };
     document.addEventListener('keydown', function (e) {
         // play and pause audio
-        if (e.ctrlKey && e.keyCode == 32 && !(e.shiftKey)) {
+        if (e.key == 'Escape') {
             togglePlay()
         };
-        // stop audio (ctrl + space)
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 32) {
-            myAudio.load();
-            isPlaying = false;
-        };
-        // speed up audio (ctrl + shift + >)
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 190) {
-            if (playbackRate < 3.0) {
-                playbackRate = playbackRate + 0.25;
-            };
-            myAudio.playbackRate = playbackRate;
-            console.log('playback rate: ' + playbackRate);
 
-        };
-        // slow down audio (ctrl + shift + <)
-        if (e.ctrlKey && e.shiftKey && e.keyCode == 188) {
-            if (playbackRate > 0.25) {
-                playbackRate = playbackRate - 0.25;
-            };
-            myAudio.playbackRate = playbackRate;
-            console.log('playback rate: ' + playbackRate);
-        };
-        // skip forward 5 seconds (ctrl + >)
-        if (e.ctrlKey && e.keyCode == 190 && !(e.shiftKey)) {
-            myAudio.currentTime += 5.0;
-        };
-        // skip back 5 seconds (ctrl + <)
-        if (e.ctrlKey && e.keyCode == 188 && !(e.shiftKey)) {
-            myAudio.currentTime -= 5.0;
-        };
+        // // speed up audio (ctrl + shift + >)
+        // if (e.ctrlKey && e.shiftKey && e.keyCode == 190) {
+        //     if (playbackRate < 3.0) {
+        //         playbackRate = playbackRate + 0.25;
+        //     };
+        //     myAudio.playbackRate = playbackRate;
+        //     console.log('playback rate: ' + playbackRate);
+        //
+        // };
+        // // slow down audio (ctrl + shift + <)
+        // if (e.ctrlKey && e.shiftKey && e.keyCode == 188) {
+        //     if (playbackRate > 0.25) {
+        //         playbackRate = playbackRate - 0.25;
+        //     };
+        //     myAudio.playbackRate = playbackRate;
+        //     console.log('playback rate: ' + playbackRate);
+        // };
+        // // skip forward 5 seconds (ctrl + >)
+        // if (e.keyCode == 50 && (e.ctrlKey || e.metaKey)) {
+        //     myAudio.currentTime += 5.0;
+        // };
+        // // skip back 5 seconds (ctrl + <)
+        // if (e.keyCode == 49 && (e.ctrlKey || e.metaKey)) {
+        //     myAudio.currentTime -= 5.0;
+        // };
     });
 
 
