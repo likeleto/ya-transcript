@@ -1,16 +1,30 @@
 :root {
     --primary: #21a094;
-    --selected-blue: #d2e4f9;
+    /* --selected-blue: #d2e4f9;
     --selected-red: #fecbcf;
     --selected-yellow: #fbeed1;
     --selected-orange: #fedecd;
     --selected-pink: #f8cde6;
     --selected-green: #cde7e2;
-    --selected-purple: #e1d2f9;
-
+    --selected-purple: #e1d2f9; */
+    --selected-1: #E6B8AF;
+    --selected-2: #F4CCCD;
+    --selected-3: #FDE5CE;
+    --selected-4: #FFF3CC;
+    --selected-5: #DAEAD3;
+    --selected-6: #D1E0E3;
+    --selected-7: #D9D3E9;
+    --selected-8: #EBD2DC;
+    --selected-9: #DD7E6B;
+    --selected-10: #EB9A99;
+    --selected-11: #F9CC9C;
+    --selected-12: #B6D7A8;
+    --selected-13: #A4C2F4;
+    --selected-14: #B7A9DA;
+    --selected-15: #D5A6BD;
     --primary-text: #1a1916;
-    --body-bg: #fafafa;
-    --body-color: #555;
+    --body-bg: #fff;
+    --body-color: #000;
     --link-color: #222;
     --link-color-hover: #000;
     --drop-bg: #f5f5f5;
@@ -23,7 +37,7 @@
     --cat-weight: 400;
     --tag-color: rgba(0, 0, 0, 0.7);
     --text-border-color: #dbdbdb;
-    --switch-bg: #b5b5b5;
+    --switch-bg: #D83434;
     --placeholder-color: rgb(122, 122, 122);
 }
 
@@ -156,7 +170,7 @@ div .controls {
 }
 
 ::selection {
-    background: rgba(210, 161, 0, 0.192);
+     background: #C4E1FF;
     /* WebKit/Blink Browsers */
 }
 
@@ -270,63 +284,63 @@ body, html {
 }
 
 .selected-1 {
-    background-color: var(--selected-orange);
+    background-color: var(--selected-1);
 }
 
 .selected-2 {
-    background-color: var(--selected-yellow);
+    background-color: var(--selected-2);
 }
 
 .selected-3 {
-    background-color: var(--selected-green);
+    background-color: var(--selected-3);
 }
 
 .selected-4 {
-    background-color: var(--selected-blue);
+    background-color: var(--selected-4);
 }
 
 .selected-5 {
-    background-color: var(--selected-purple);
+    background-color: var(--selected-5);
 }
 
 .selected-6 {
-    background-color: var(--selected-pink);
+    background-color: var(--selected-6);
 }
 
 .selected-7 {
-    background-color: var(--selected-red);
+    background-color: var(--selected-7);
 }
 
 .selected-8 {
-    background-color: var(--selected-orange);
+    background-color: var(--selected-8);
 }
 
 .selected-9 {
-    background-color: var(--selected-yellow);
+    background-color: var(--selected-9);
 }
 
 .selected-10 {
-    background-color: var(--selected-green);
+    background-color: var(--selected-10);
 }
 
 .selected-11 {
-    background-color: var(--selected-blue);
+    background-color: var(--selected-11);
 }
 
 .selected-12 {
-    background-color: var(--selected-purple);
+    background-color: var(--selected-12);
 }
 
 .selected-13 {
-    background-color: var(--selected-pink);
+    background-color: var(--selected-13);
 }
 
 .selected-14 {
-    background-color: var(--selected-red);
+    background-color: var(--selected-14);
 }
 
 .selected-15 {
-    background-color: var(--selected-red);
+    background-color: var(--selected-15);
 }
 
 .selected-remove {
@@ -334,63 +348,63 @@ body, html {
 }
 
 .button-1 {
-    background-color: var(--selected-blue);
+    background-color: var(--selected-1);
 }
 
 .button-2 {
-    background-color: var(--selected-red);
+    background-color: var(--selected-2);
 }
 
 .button-3 {
-    background-color: var(--selected-yellow);
+    background-color: var(--selected-3);
 }
 
 .button-4 {
-    background-color: var(--selected-orange);
+    background-color: var(--selected-4);
 }
 
 .button-5 {
-    background-color: var(--selected-pink);
+    background-color: var(--selected-5);
 }
 
 .button-6 {
-    background-color: var(--selected-green);
+    background-color: var(--selected-6);
 }
 
 .button-7 {
-    background-color: var(--selected-purple);
+    background-color: var(--selected-7);
 }
 
 .button-8 {
-    background-color: var(--selected-blue);
+    background-color: var(--selected-8);
 }
 
 .button-9 {
-    background-color: var(--selected-red);
+    background-color: var(--selected-9);
 }
 
 .button-10 {
-    background-color: var(--selected-yellow);
+    background-color: var(--selected-10);
 }
 
 .button-11 {
-    background-color: var(--selected-orange);
+    background-color: var(--selected-11);
 }
 
 .button-12 {
-    background-color: var(--selected-pink);
+    background-color: var(--selected-12);
 }
 
 .button-13 {
-    background-color: var(--selected-green);
+    background-color: var(--selected-13);
 }
 
 .button-14 {
-    background-color: var(--selected-purple);
+    background-color: var(--selected-14);
 }
 
 .button-15 {
-    background-color: var(--selected-purple);
+    background-color: var(--selected-15);
 }
 
 
@@ -400,63 +414,63 @@ body, html {
 }
 
 .category-1 {
-    background-color: var(--selected-orange) !important;
+    background-color: var(--selected-1) !important;
 }
 
 .category-2 {
-    background-color: var(--selected-yellow) !important;
+    background-color: var(--selected-2) !important;
 }
 
 .category-3 {
-    background-color: var(--selected-green) !important;
+    background-color: var(--selected-3) !important;
 }
 
 .category-4 {
-    background-color: var(--selected-blue) !important;
+    background-color: var(--selected-4) !important;
 }
 
 .category-5 {
-    background-color: var(--selected-purple) !important;
+    background-color: var(--selected-5) !important;
 }
 
 .category-6 {
-    background-color: var(--selected-pink) !important;
+    background-color: var(--selected-6) !important;
 }
 
 .category-7 {
-    background-color: var(--selected-red) !important;
+    background-color: var(--selected-7) !important;
 }
 
 .category-8 {
-    background-color: var(--selected-orange) !important;
+    background-color: var(--selected-8) !important;
 }
 
 .category-9 {
-    background-color: var(--selected-yellow) !important;
+    background-color: var(--selected-9) !important;
 }
 
 .category-10 {
-    background-color: var(--selected-green) !important;
+    background-color: var(--selected-10) !important;
 }
 
 .category-11 {
-    background-color: var(--selected-blue) !important;
+    background-color: var(--selected-11) !important;
 }
 
 .category-12 {
-    background-color: var(--selected-purple) !important;
+    background-color: var(--selected-12) !important;
 }
 
 .category-13 {
-    background-color: var(--selected-pink) !important;
+    background-color: var(--selected-13) !important;
 }
 
 .category-14 {
-    background-color: var(--selected-red) !important;
+    background-color: var(--selected-14) !important;
 }
 
 .category-15 {
-    background-color: var(--selected-red) !important;
+    background-color: var(--selected-15) !important;
 }
 
 .category-remove {
@@ -503,4 +517,15 @@ body, html {
 }
 .navbar{
   box-shadow: 1px 1px 2px #ccc;
+}
+
+.feedback{
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  border-radius: 1rem;
+  background: var(--primary);
+  color: #fff !important;
+  z-index: 1;
+  padding: .2rem .6rem .2rem  .3rem ;
 }
