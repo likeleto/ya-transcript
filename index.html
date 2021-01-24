@@ -237,9 +237,9 @@
     </div>
     <div class="navbar-item" style="flex-grow: 2 !important;">
       <div class="gap-example field audio-container">
-        <audio id="hyperplayer" style="z-index: 5000000; position:relative; height:calc(100% - 40px)">
+        <video id="hyperplayer" style="z-index: 5000000; display: none; position:relative; height:calc(100% - 40px)">
         <source src="data/demo.opus" type="audio/mpeg">
-      </audio>
+      </video>
       </div>
     </div>
 
@@ -282,6 +282,9 @@
 
         </div>
       </div>
+      <a class="navbar-item" id="togglePipButton">
+                  <i class="fas fa-video fa-lg" title='Picture in picture (for video files)'></i>
+            </a>
       <a class="navbar-item" id="modal-button">
                   <i class="fas fa-question-circle fa-lg"></i>
             </a>
@@ -744,7 +747,10 @@
   <script src="javascript/bulma.js"></script>
 
   <!-- <script src="../../node_modules/green-audio-player/dist/js/green-audio-player.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script> -->
+  <script src="javascript/green-audio-player.js"></script>
+  <script src="javascript/pip.js"></script>
+
 
   <!-- <script src="../../node_modules/tether/dist/js/tether.min.js"></script>
   <script src="../../node_modules/tether-drop/dist/js/drop.min.js"></script> -->

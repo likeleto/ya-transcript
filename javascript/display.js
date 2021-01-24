@@ -86,7 +86,7 @@ function handleFileSelect(evt) {
   for (var i = 0, f; f = files[i]; i++) {
 
     // Only process audio files.
-    if (!f.type.match('audio.*')) {
+    if (!f.type.match('audio.*') && !f.type.match('video.*')) {
       alert('file not audio')
       console.log('file not audio');
       return;
