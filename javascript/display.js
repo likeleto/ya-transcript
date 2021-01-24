@@ -78,6 +78,9 @@ function getAudioUrl() {
 // set limit
 
 function handleFileSelect(evt) {
+  gtag('event', 'media_chosen', {
+'event_category' : 'media'
+});
   var files = evt.target.files; // FileList object
 
 
@@ -110,6 +113,9 @@ function handleFileSelect(evt) {
         document.getElementById("hyperplayer").src = e.target.result;
         //document.getElementById("hyperplayer").playbackRate = 2;
         console.log(theFile.name);
+        gtag('event', 'media_loaded', {
+      'event_category' : 'media','event_label' : f.type,'value':fileSize
+      });
         //document.getElementById("audio-name").innerHTML = theFile.name;
 
         // var span = document.createElement('span');
@@ -221,6 +227,9 @@ function handleProjectFileSelect(evt) {
         // Render thumbnail.
 
         console.log("loading project:" + theFile.name);
+        gtag('event', 'project_loaded', {
+      'event_category' : 'project'
+    });
         //document.getElementById("project-name").innerHTML = theFile.name;
         $("#content").html(e.target.result)
         buildTimes();
@@ -261,7 +270,9 @@ var transcriptObject = [];
 var word_start_time;
 
 function displayTranscript(userJson) {
-
+  gtag('event', 'json_chosen', {
+'event_category' : 'json'
+});
 clearTranscript();
   // get json transcript from user input (default transcript.json)
   // var json = "json/" + document.getElementById("user-filename").value;
@@ -887,7 +898,9 @@ clearTranscript();
   // });
   initHyper();
 
-
+  gtag('event', 'json_loaded', {
+'event_category' : 'json'
+});
 
 };
 
