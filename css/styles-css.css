@@ -130,6 +130,7 @@ a,
     font-weight: var(--font-weight);
     border:none;
     box-shadow: none !important;
+    max-height: none;
 }
 
 select,
