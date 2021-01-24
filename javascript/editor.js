@@ -2,7 +2,7 @@
 
 // creates an array of all annotated text
 // ultimately, want to break them down by catogory. a column per category
-
+var myAudio = ''
 
 
 // create array of annotations to be exported
@@ -97,7 +97,7 @@ $(document).ready(function () {
     new GreenAudioPlayer('.gap-example');
 
     // load audio
-    var myAudio = document.getElementById("hyperplayer");
+    myAudio = document.getElementById("hyperplayer");
     var isPlaying = false;
     var playbackRate = 1.0;
 
@@ -215,6 +215,12 @@ function displayConfidence() {
 }
 // display confidence by default for demo
 displayConfidence()
+
+$('.speed').change(function (e) {
+    // store the value of the checkbox when it's changed
+    myAudio.playbackRate = e.target.defaultValue
+    //console.log(myAudio.playbackRate,e.target.defaultValue)
+});
 
 // turn off the interactivity and return text color
 // TODO this is not a smart way of doing this!
