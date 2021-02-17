@@ -20,6 +20,9 @@ function exportToTxt() {
     element.click();
 
     document.body.removeChild(element);
+    gtag('event', 'transcript_export', {
+  'event_category' : 'transcript'
+});
 }
 
 // export raw html to file - can late be reloaded
@@ -40,6 +43,9 @@ function exportToHtml() {
     element.click();
 
     document.body.removeChild(element);
+    gtag('event', 'project_export', {
+  'event_category' : 'project'
+});
 }
 
 

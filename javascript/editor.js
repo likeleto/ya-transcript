@@ -90,6 +90,9 @@ function exportToCsv() {
             document.body.removeChild(link);
         }
     }
+    gtag('event', 'annotations_export', {
+  'event_category' : 'annotation'
+});
 }
 
 $(document).ready(function () {
@@ -218,6 +221,7 @@ $('.speed').change(function (e) {
     // store the value of the checkbox when it's changed
     myAudio.playbackRate = e.target.defaultValue
     //console.log(myAudio.playbackRate,e.target.defaultValue)
+    gtag('event', 'set_speed', {'event_category' : 'playback'});
 });
 
 // turn off the interactivity and return text color

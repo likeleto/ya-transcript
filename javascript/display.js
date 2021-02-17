@@ -51,6 +51,7 @@ function clearTranscript() {
   $('#content').html('');
   $('#times').html('')
   $('.annotation-content').html('');
+  gtag('event', 'transcript_clear', {'event_category' : 'transcript'});
 }
 
 // creates a new paragraph tag
