@@ -256,6 +256,9 @@ function RemoveAnnotation() {
   //   $(w.startContainer.parentElement).replaceWith(function () {
   //     return $(this).contents();
   // });
+  gtag('event', 'annotation_remove', {
+'event_category' : 'annotation'
+});
 }
 
 
@@ -403,4 +406,7 @@ $(document).ready(function() {
   $('.tag-icon').click(function(event) {
     SelectText(Number($(this).attr('catid')));
   });
+  gtag('event', 'annotation_create', {
+'event_category' : 'annotation'
+});
 });
