@@ -75,6 +75,7 @@ function exportToCsv() {
 
 
     var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+    gtag('event', 'annotations_export', {'event_category' : 'annotation'});
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename);
     } else {
@@ -90,9 +91,7 @@ function exportToCsv() {
             document.body.removeChild(link);
         }
     }
-    gtag('event', 'annotations_export', {
-  'event_category' : 'annotation'
-});
+
 }
 
 $(document).ready(function () {

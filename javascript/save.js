@@ -43,9 +43,7 @@ function exportToHtml() {
     element.click();
 
     document.body.removeChild(element);
-    gtag('event', 'project_export', {
-  'event_category' : 'project'
-});
+    gtag('event', 'project_export', {'event_category' : 'project'});
 }
 
 
@@ -194,6 +192,8 @@ function loadSavedText() {
                     document.getElementById("hyperplayer").src = '';
                     var storedText = localStorage.getItem("saved-text");
                     console.log("saved data found");
+                    gtag('event', 'project_autosave_loaded', {'event_category' : 'project'});
+
                     document.getElementById("content").innerHTML = document.getElementById("content").innerHTML + storedText;
                     buildTimes();
                 }
