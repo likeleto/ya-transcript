@@ -665,7 +665,11 @@ clearTranscript();
           wordLabel = chunk[i].word;
           startTimeLabel = Number(chunk[i]["startTime"].substr(0, chunk[i]["startTime"].length - 1));
           durationLabel = Number(chunk[i]["endTime"].substr(0, chunk[i]["endTime"].length - 1)) - Number(chunk[i]["startTime"].substr(0, chunk[i]["startTime"].length - 1));
-
+          if (i < chunkLength-1){
+            nextStartTime = Number(chunk[i+1]["startTime"].substr(0, chunk[i]["startTime"].length - 1))-Number(chunk[i]["endTime"].substr(0, chunk[i]["endTime"].length - 1));
+          }else{
+            nextStartTime = 0;
+          }
 
           word = chunk[i].word;
           // word start time is in seconds
@@ -680,7 +684,8 @@ clearTranscript();
 
           word_start_time = startTimeLabel + adjustment;
           word_start_time_ms = word_start_time * 1000
-
+          next_word_start_time = nextStartTime + adjustment;
+          next_word_start_time_ms = next_word_start_time * 1000
           // if (chunk[i + 1] && chunk[i + 1].start_time) {
           //   next_word_start_time = chunk[i + 1].start_time;
           //   // TODO truncaste this as it can go to lots of decimal places
@@ -698,7 +703,7 @@ clearTranscript();
 
 
           // add data to each word: confidence, start time, duration, speaker
-          spanStartTime = "<span data-m='" + word_start_time_ms + "' data-d='" + duration_ms + "' data-confidence='" + confidence + "'>";
+          spanStartTime = "<span data-n='" + next_word_start_time_ms + "' data-s='" + chunk[i].speakerTag + "'data-m='" + word_start_time_ms + "' data-d='" + duration_ms + "' data-confidence='" + confidence + "'>";
           // create html to be added
 
           space = " ";
@@ -724,7 +729,14 @@ clearTranscript();
           //console.log(speaker_times[i]);
           //}
           paragraphWordCounter++
-
+        //   if (i < chunkLength-2 && chunk[i].speakerTag != chunk[i+1].speakerTag && chunk[i].speakerTag != chunk[i+2].speakerTag){
+        //      paragraphCounter++;
+        //      paraId = "para-" + paragraphCounter;
+        //      newPara = CreateNewPara(word_start_time, new_speaker, paraId);
+        //      $('#content').append(newPara);
+        //      // reset the paragraph word counter
+        //      paragraphWordCounter = 0;
+        // }
           //if (paragraphWordCounter > max_para_length) {
           // set data for new speaker
 
@@ -732,6 +744,7 @@ clearTranscript();
           //};
 
         };
+
         if ((j % 4) == 0) {
           paragraphCounter++;
           paraId = "para-" + paragraphCounter;
@@ -739,9 +752,16 @@ clearTranscript();
           $('#content').append(newPara);
           // reset the paragraph word counter
           paragraphWordCounter = 0;
-          // console.log(word);
-          // console.log('para too long');
         }
+        if (results[j].alternatives[0].words[0].speakerTag != results[j+1].alternatives[0].words[0].speakerTag){
+          paragraphCounter++;
+          paraId = "para-" + paragraphCounter;
+          newPara = CreateNewPara(word_start_time, new_speaker, paraId);
+          $('#content').append(newPara);
+          // reset the paragraph word counter
+          paragraphWordCounter = 0;
+        }
+
 
       }
     }
