@@ -250,8 +250,52 @@ function loadSavedText() {
 
     }
 }
+
+function getQueryParams(qs) {
+    qs = qs.split('+').join(' ');
+
+    var params = {},
+        tokens,
+        re = /[?&]?([^=]+)=([^&]*)/g;
+
+    while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+
+    return params;
+}
+
+// load json from url
+function getJSONFromUrl(url) {
+
+        $.getJSON(url, function (data) {
+            // displayTranscript(data);
+            displayTranscript(data)
+        });
+}
+
+// load audio from file or url using the dropdown or text input
+function getAudioUrl(url) {
+  $.getJSON(url, function (data) {
+      document.getElementById("hyperplayer").src = data['url'];
+  });
+
+}
+
 $(document).ready(function () {
-initHyper();
-    loadSavedText();
+  initHyper();
+  var query = getQueryParams(document.location.search);
+
+if ('json' in query) {
+  getJSONFromUrl(query['json']);
+}else{
+  loadSavedText();
+}
+if ('audio' in query) {
+  getAudioUrl(query['audio']);
+}
+
+
+
 
 })
