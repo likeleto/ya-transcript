@@ -96,11 +96,11 @@ function handleFileSelect(evt) {
       return;
     };
 
-    // Only process if size is smaller than 120mb
+    // Only process if size is smaller than 1gb
     fileSize = Math.round(files[0].size / 1000000)
-    if (fileSize > 121.457280) {
-      alert('file is ' + fileSize + 'mb. but max file size is 120mb')
-      console.log('file is ' + fileSize + 'mb. but max file size is 120mb');
+    if (fileSize > 1000) {
+      alert('file is ' + fileSize + 'mb. but max file size is 1gb')
+      console.log('file is ' + fileSize + 'mb. but max file size is 1gb');
       return;
     }
 
