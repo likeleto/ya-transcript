@@ -657,10 +657,12 @@ clearTranscript();
 
         for (var i = 0; i < chunkLength; i++) {
           // get data from JSON string
-          if (i==0){
-            chunk[i].word = chunk[i].word[0].toUpperCase() + chunk[i].word.substring(1);
-          }else if (i == chunkLength-1){
-            chunk[i].word = chunk[i].word + '.';
+          if (data.response['@type']){
+            if (i==0){
+              chunk[i].word = chunk[i].word[0].toUpperCase() + chunk[i].word.substring(1);
+            }else if (i == chunkLength-1){
+              chunk[i].word = chunk[i].word + '.';
+            }
           }
           wordLabel = chunk[i].word;
           startTimeLabel = Number(chunk[i]["startTime"].substr(0, chunk[i]["startTime"].length - 1));
@@ -753,13 +755,15 @@ clearTranscript();
           // reset the paragraph word counter
           paragraphWordCounter = 0;
         }
-        if (results[j].alternatives[0].words[0].speakerTag != results[j+1].alternatives[0].words[0].speakerTag){
-          paragraphCounter++;
-          paraId = "para-" + paragraphCounter;
-          newPara = CreateNewPara(word_start_time, new_speaker, paraId);
-          $('#content').append(newPara);
-          // reset the paragraph word counter
-          paragraphWordCounter = 0;
+        if (j != jsonLength -1){
+          if (results[j].alternatives[0].words[0].speakerTag != results[j+1].alternatives[0].words[0].speakerTag){
+            paragraphCounter++;
+            paraId = "para-" + paragraphCounter;
+            newPara = CreateNewPara(word_start_time, new_speaker, paraId);
+            $('#content').append(newPara);
+            // reset the paragraph word counter
+            paragraphWordCounter = 0;
+          }
         }
 
 
