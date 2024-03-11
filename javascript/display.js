@@ -115,7 +115,7 @@ function handleFileSelect(evt) {
         //document.getElementById("hyperplayer").playbackRate = 2;
         console.log(theFile.name);
         gtag('event', 'media_loaded', {
-      'event_category' : 'media','event_label' : f.type,'value':fileSize
+      'event_category' : 'media','event_label' : theFile.type,'value':fileSize
       });
         //document.getElementById("audio-name").innerHTML = theFile.name;
 
