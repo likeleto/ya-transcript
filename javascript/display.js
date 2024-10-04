@@ -64,7 +64,7 @@ function CreateNewPara(timeOfFirstWord, speaker, paraId) {
   var endPara = "</p>"
   //var newPara = paraTime + paraSpeaker + paraFormattedTime + endPara;
   //remove speaket and time inplece switch to buildTimes func
-  var newPara = paraTime + endPara;
+  var newPara = paraTime +paraSpeaker + endPara;
   return newPara;
 }
 
@@ -262,7 +262,9 @@ document.getElementById('user-project-file').addEventListener('change', handlePr
 
 // activates interactive script on load. For demo only. Need to remove this.
 setTimeout(function(){
-    hyper(true);
+    
+  
+  hyper(true);
     console.log('interactive script');
 
 }, 2000);
@@ -300,9 +302,151 @@ clearTranscript();
   var newPara = "";
 
 
-  // parse the DeepSPeech formatted json
+  if (data.segments){
+    console.log('Wisper formatted data detected');
+    // turn on confidence display toggle
+    document.getElementById('confidence').removeAttribute('disabled');
 
-  if (data.words) {
+    var results = data.segments
+
+    jsonLength = results.length
+
+
+    var confidence = 1;
+
+    // loop through json to appeand words and data
+    // TODO need to adjust this to create a para first
+    // then to append words to that paragraph
+    // then when speaker changes to create a new para
+    for (var j = 0; j < jsonLength; j++) {
+        chunk = results[j].words;
+        chunkLength = chunk.length;
+
+        if (j == 0) {
+
+          if (chunk[0].speaker != undefined) {
+            new_speaker = chunk[0].speaker
+          }else{
+            new_speaker = "";
+          }
+          
+
+          // add new para
+          // function takes: timeOfFirstWord, speaker, wordCount
+          paraId = "para-" + paragraphCounter;
+          newPara = CreateNewPara('0', new_speaker, paraId);
+          $('#content').append(newPara);
+
+        };
+
+        for (var i = 0; i < chunkLength; i++) {
+          // get data from JSON string
+
+          wordLabel = chunk[i].word;
+          startTimeLabel = Number(chunk[i]["start"]);
+          durationLabel = Number(chunk[i]["end"])- Number(chunk[i]["start"]);
+          if (chunk[i].speaker != undefined) {
+            speaker = chunk[0].speaker
+          }else{
+            speaker = "";
+          }
+          if (i < chunkLength-1){
+            nextStartTime = Number(chunk[i+1]["start"])-Number(chunk[i]["end"]);
+          }else{
+            nextStartTime = 0;
+          }
+
+          word = chunk[i].word;
+          // word start time is in seconds
+
+          // create an manual adjustment to data when there is a playback sync error
+          // word highlighting too early means data time is too low, so make it higher
+          // word highlighting too late means data time is too high, so make it lower
+          var adjustment = 0;
+          // var delay = $("#user-delay").val();
+          // // adjustment = Number(delay);
+          // console.log("adjustment: " + adjustment);
+
+          word_start_time = startTimeLabel + adjustment;
+          word_start_time_ms = word_start_time * 1000
+          next_word_start_time = nextStartTime + adjustment;
+          next_word_start_time_ms = next_word_start_time * 1000
+
+          duration_ms = 1000 * durationLabel;
+
+
+
+
+          // add data to each word: confidence, start time, duration, speaker
+          spanStartTime = "<span data-n='" + next_word_start_time_ms + "' data-s='" + chunk[i].speaker + "'data-m='" + word_start_time_ms + "' data-d='" + duration_ms + "' data-confidence='" + chunk[i].score + "'>";
+          // create html to be added
+
+          space = " ";
+
+          text = space + spanStartTime + word + "</span>";
+
+          // Uncomment out below to use tooltips
+          // spanTooltip = "<span class='tooltiptext'>";
+          // divTooltip = "<div class='tooltip'>";
+          // text = space + divTooltip + spanStartTime + word + "</span>" + spanTooltip + confidence + "<br>" + word_start_time + "</span>" + "</div>";
+
+          // append text to paragraph
+          para = "#para-" + paragraphCounter;
+
+          $(para).append(text);
+
+          // if it gets to a full stop and the current paragraph is too long, start a new paragraph
+          // TODO let user set the paragraph amount
+          //var max_para_length = 35;
+
+
+          //for (var i = 0; i < speaker_times.length; i++) {
+          //console.log(speaker_times[i]);
+          //}
+          paragraphWordCounter++
+        //   if (i < chunkLength-2 && chunk[i].speakerTag != chunk[i+1].speakerTag && chunk[i].speakerTag != chunk[i+2].speakerTag){
+        //      paragraphCounter++;
+        //      paraId = "para-" + paragraphCounter;
+        //      newPara = CreateNewPara(word_start_time, new_speaker, paraId);
+        //      $('#content').append(newPara);
+        //      // reset the paragraph word counter
+        //      paragraphWordCounter = 0;
+        // }
+          //if (paragraphWordCounter > max_para_length) {
+          // set data for new speaker
+
+
+          //};
+
+        };
+
+        if ((j % 4) == 0) {
+          paragraphCounter++;
+          paraId = "para-" + paragraphCounter;
+          newPara = CreateNewPara(word_start_time, speaker, paraId);
+          $('#content').append(newPara);
+          // reset the paragraph word counter
+          paragraphWordCounter = 0;
+        }
+        if (j != jsonLength -1){
+          if (results[j].words[0].speaker != results[j+1].words[0].speaker){
+            paragraphCounter++;
+            paraId = "para-" + paragraphCounter;
+            newPara = CreateNewPara(word_start_time, speaker, paraId);
+            $('#content').append(newPara);
+            // reset the paragraph word counter
+            paragraphWordCounter = 0;
+          }
+        }
+
+
+      
+    }
+    buildTimes()
+  }
+    // parse the DeepSPeech formatted json
+
+  else if (data.words) {
     console.log('Mozilla formatted data detected');
 
     // turn off confidence toggle
@@ -359,7 +503,7 @@ clearTranscript();
 
       if (i == 0) {
 
-        new_speaker = "New Para";
+        new_speaker = "";
 
         // add new para
         // function takes: timeOfFirstWord, speaker, wordCount
@@ -645,7 +789,7 @@ clearTranscript();
 
         if (j == 0) {
 
-          new_speaker = "New Para";
+          new_speaker = "";
 
           // add new para
           // function takes: timeOfFirstWord, speaker, wordCount
@@ -800,7 +944,7 @@ clearTranscript();
 
         if (j == 0) {
 
-          new_speaker = "New Para";
+          new_speaker = "";
 
           // add new para
           // function takes: timeOfFirstWord, speaker, wordCount
@@ -938,7 +1082,13 @@ function initHyper(){
     setTimeout(
       function() {
         console.log('transcript being initiated');
-        hyper(true);
+        let minimizedMode = false;
+        let autoScroll = true;
+        let doubleClick = false;
+        let webMonetization = false;
+        let playOnClick = false;
+        
+        new HyperaudioLite("hypertranscript", "hyperplayer", minimizedMode, autoScroll, doubleClick, webMonetization, playOnClick);
 
       }, 1000)
   }
