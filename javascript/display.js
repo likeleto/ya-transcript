@@ -264,8 +264,8 @@ document.getElementById('user-project-file').addEventListener('change', handlePr
 setTimeout(function(){
     
   
-  hyper(true);
-    console.log('interactive script');
+  initHyper();
+  console.log('interactive script');
 
 }, 2000);
 
